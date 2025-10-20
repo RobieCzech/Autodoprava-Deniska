@@ -235,3 +235,177 @@
   // Inicializace
   if (currentLang !== "cs") translatePage(currentLang);
 })();
+
+/* ==== Překlad + měna (finální stabilní verze) ==== */
+(function(){
+  const oldBtn = document.getElementById('langToggle');
+  if (!oldBtn) return;
+
+  const btn = oldBtn.cloneNode(true);
+  oldBtn.parentNode.replaceChild(btn, oldBtn);
+
+  const LANG_KEY = 'deniska-lang';
+  let current = localStorage.getItem(LANG_KEY) || 'cs';
+  const html = document.documentElement;
+
+  const dict = {
+    en: {
+      "Autodoprava Deniska — profesionální přeprava osob a transfery":"Deniska Transport — professional passenger transport and transfers",
+      "Diskrétní a spolehlivé služby přepravy: transfery na letiště, osobní přepravy mezi městy, pronájem vozidla s řidičem pro svatby a oslavy nebo přeprava menšího nákladu. Moderní vozový park a zkušený řidič — komfort, bezpečí a přesnost.":"Discreet and reliable transport services: airport transfers, intercity travel, car rental with driver for weddings and events, or small cargo transport. Modern fleet and experienced driver — comfort, safety and precision.",
+      "Objednat transfer":"Book transfer",
+      "Zobrazit ceník":"View price list",
+      "Rychlá hotline":"Quick hotline",
+      "Naše služby":"Our Services",
+      "Komplexní nabídka přepravy přizpůsobená vašim požadavkům — od jednoduchých transferů po dlouhodobé pronájmy s řidičem.":"Comprehensive transport services tailored to your needs — from simple transfers to long-term rentals with driver.",
+      "Transfery mezi městy":"Intercity Transfers",
+      "Přímé spoje bez přestupů: pohodlí, bezpečí a přesný odhad času příjezdu.":"Direct routes without transfers: comfort, safety, and accurate arrival times.",
+      "Transfery na letiště":"Airport Transfers",
+      "Načasování dle vašeho letu, pomoc s zavazadly a profesionální chování řidiče.":"Timed to your flight, assistance with luggage, and professional driver conduct.",
+      "Svatební a společenské události":"Weddings and Events",
+      "Elegantní vozy s řidičem pro svatby, oslavy a VIP dopravu.":"Elegant vehicles with driver for weddings, celebrations and VIP transport.",
+      "Malý náklad":"Small Cargo",
+      "Možnost převozu menšího nákladu v rámci služeb – bezpečně a diskrétně.":"Possibility of transporting small cargo – safely and discreetly.",
+      "Ceník (orientační)":"Price List (indicative)",
+      "Níže uvedené ceny jsou reprezentativním příkladem. Ceny jsou smluvní a mohou se lišit podle konkrétní objednávky. Všechny ceny jsou uvedeny bez DPH.":"Prices below are representative examples. Prices are contractual and may vary depending on the specific booking. All prices exclude VAT.",
+      "Osobní vůz: Škoda Kodiaq (max 4 osoby)":"Passenger car: Škoda Kodiaq (max 4 persons)",
+      "Minivan: Mercedes třídy V (max 6 osob)":"Minivan: Mercedes V-Class (max 6 persons)",
+      "Pronájem vozidla s řidičem (svatby, oslavy)":"Vehicle rental with driver (weddings, events)",
+      "Základní sazba":"Base rate",
+      "V ceně zahrnuto":"Included",
+      "paušál 50 km za každou započatou hodinu":"flat 50 km for each started hour",
+      "Čekání":"Waiting time",
+      "Každá další započatá hodina":"Each additional started hour",
+      "Ceny zahrnují poplatky za parkování a případné vjezdy na letiště.":"Prices include parking and potential airport access fees.",
+      "Vozový park":"Fleet",
+      "Pečlivě udržované vozy od standardních osobních až po minivany pro skupiny. Všechny vozy jsou pojištěné a pravidelně kontrolované.":"Well-maintained vehicles from standard cars to minivans for groups. All vehicles are insured and regularly serviced.",
+      "Kontakt & rezervace":"Contact & Reservations",
+      "Pro rezervace a cenovou nabídku nám zavolejte nebo napište. Preferujeme přímou domluvu pro upřesnění trasy, počtu osob a časů.":"For booking or price quote, call or email us. We prefer direct communication to specify route, number of passengers and times.",
+      "Odeslat":"Send",
+      "Jméno a příjmení":"Full name",
+      "Telefon":"Phone",
+      "Zpráva / požadavek":"Message / request",
+      "Rezervace":"Booking",
+      "Ceník":"Price list",
+      "Služby":"Services",
+      "Kontakt":"Contact",
+      "Brno – Bratislava":"Brno – Bratislava",
+      "Brno – Vídeň":"Brno – Vienna",
+      "Brno – Praha":"Brno – Prague",
+      "© Autodoprava Deniska — Všechna práva vyhrazena":"© Deniska Transport — All rights reserved",
+      "IČO: 09235787 • DIČ: CZ7409214065 • Ceny jsou smluvní, tento ceník je orientační.":"Company ID: 09235787 • VAT ID: CZ7409214065 • Prices are contractual; this pricelist is indicative."
+    },
+    placeholders: {
+      en: {
+        "Jméno a příjmení":"Full name",
+        "Telefon":"Phone",
+        "Email":"Email",
+        "Zpráva / požadavek":"Message / request"
+      }
+    },
+    currency: { cs:"Kč", en:"CZK" }
+  };
+
+  function saveOriginals(){
+    document.querySelectorAll('h1,h2,h3,h4,p,li,button,a,strong,span,div').forEach(el=>{
+      if(el.children && el.children.length>0) return;
+      if(!el.dataset.orig) el.dataset.orig = el.textContent;
+    });
+    document.querySelectorAll('input[placeholder],textarea[placeholder]').forEach(el=>{
+      if(!el.dataset.origPh) el.dataset.origPh = el.getAttribute('placeholder')||'';
+    });
+  }
+
+  function translate(lang){
+    const t = dict[lang]||{};
+    const ph = (dict.placeholders||{})[lang]||{};
+    document.querySelectorAll('h1,h2,h3,h4,p,li,button,a,strong,span,div').forEach(el=>{
+      if(el.children && el.children.length>0) return;
+      const orig = el.dataset.orig || el.textContent;
+      if(lang==='cs'){ el.textContent = el.dataset.orig; }
+      else if(t[orig]) el.textContent = t[orig];
+    });
+    document.querySelectorAll('input[placeholder],textarea[placeholder]').forEach(el=>{
+      const orig = el.dataset.origPh || el.getAttribute('placeholder')||'';
+      if(lang==='cs') el.setAttribute('placeholder',orig);
+      else if(ph[orig]) el.setAttribute('placeholder',ph[orig]);
+    });
+    replaceCurrency(lang);
+  }
+
+  function replaceCurrency(lang){
+    const from = lang==='en'?dict.currency.cs:dict.currency.en;
+    const to   = lang==='en'?dict.currency.en:dict.currency.cs;
+    document.querySelectorAll('p,div,strong,li,span').forEach(el=>{
+      if(el.children && el.children.length>0) return;
+      el.textContent = el.textContent.replace(new RegExp(`\\b${from}\\b`,'g'), to);
+    });
+  }
+
+  function apply(lang){
+    saveOriginals();
+    translate(lang);
+    html.lang = lang;
+    btn.textContent = (lang==='cs'?'EN':'CZ');
+    localStorage.setItem(LANG_KEY, lang);
+  }
+
+  btn.addEventListener('click',()=>{
+    current = (current==='cs'?'en':'cs');
+    apply(current);
+  });
+
+  apply(current);
+})();
+
+// --- Jednoduchá výměna měny Kč ↔ CZK bez šahání na formuláře/atributy ---
+(function () {
+  // Nahradí měnu v textových uzlech podle <html lang="...">
+  function swapCurrencyByLang() {
+    const lang = (document.documentElement.lang || 'cs').toLowerCase();
+    const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);
+
+    // povolíme různé mezery před měnou (NBSP, narrow NBSP, obyčejná)
+    const SPACE = "[\\u00A0\\u202F\\s]*";
+    const reKc  = new RegExp(SPACE + "Kč(?![\\w])", "g");   // …Kč
+    const reCzk = new RegExp(SPACE + "CZK(?![\\w])", "g");  // …CZK
+
+    let node;
+    while ((node = walker.nextNode())) {
+      // přeskočit prázdné/jen whitespace
+      if (!node.nodeValue || !node.nodeValue.trim()) continue;
+
+      // neřešíme text v script/style (TreeWalker je do nich nepustí), ani v contenteditable — tam šahat nechceme
+      if (node.parentElement && node.parentElement.isContentEditable) continue;
+
+      let t = node.nodeValue;
+
+      if (lang === "en") {
+        if (reKc.test(t)) t = t.replace(reKc, " CZK");
+      } else {
+        if (reCzk.test(t)) t = t.replace(reCzk, " Kč");
+      }
+
+      // sjednocení vícenásobných mezer
+      t = t.replace(/[\u00A0\u202F]/g, " ").replace(/\s{2,}/g, " ");
+
+      if (t !== node.nodeValue) node.nodeValue = t;
+    }
+  }
+
+  // Spustit po načtení
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", swapCurrencyByLang);
+  } else {
+    swapCurrencyByLang();
+  }
+
+  // Navázat na tvoje tlačítko přepínače jazyka (pokud existuje)
+  const langBtn = document.getElementById("langToggle");
+  if (langBtn) {
+    langBtn.addEventListener("click", () => {
+      // počkáme, až doběhne tvůj překlad, pak vyměníme měnu
+      setTimeout(swapCurrencyByLang, 0);
+    });
+  }
+})();
+
