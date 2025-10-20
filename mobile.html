@@ -7,106 +7,63 @@
     <meta name="description" content="Autodoprava Deniska — profesionální přeprava osob a transfery. Mobilní verze.">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
-
     <style>
-      /* ===== Navigace ===== */
-      header {
-        position: fixed;
-        top: 0; left: 0; right: 0;
-        width: 100%;
-        height: 68px;
-        background: rgba(255,255,255,0.96);
-        backdrop-filter: blur(12px);
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        padding: 0 16px;
-        z-index: 9999;
-        border-bottom: 1px solid rgba(0,0,0,0.1);
-      }
-      header .brand {
-        font-weight: 800;
-        font-size: 18px;
-        color: var(--dark);
-        white-space: nowrap;
-      }
-      .header-actions {
-        display: flex;
-        align-items: center;
-        gap: 8px;
-      }
-      .moon-btn, .lang-btn, .menu-toggle {
-        background: transparent;
-        border: none;
-        font-size: 20px;
-        cursor: pointer;
-        color: var(--dark);
-      }
+      :root{--accent:#44178d;--accent-2:#046475;--bg-top:#4d6797;--bg-bottom:#b5b5b8;--dark:#051227;--muted:#6b7280;--card:#ffffff;--glass:rgba(0,0,0,0.04);--radius:12px;--shadow:0 8px 28px rgba(2,6,23,0.08);}
+      *{box-sizing:border-box} html,body{height:100%} body{margin:0;font-family:'Inter',system-ui,Segoe UI,Roboto,Arial;color:var(--dark);background:linear-gradient(180deg,var(--bg-top),var(--bg-bottom));-webkit-font-smoothing:antialiased}
+      body.dark{--bg-top:#0b1220;--bg-bottom:#0b1220;--dark:#e6eef8;--muted:#9aa4b2;--card:#0f1724;background:linear-gradient(180deg,#0b1220,#0b1220)}
 
-      nav {
-        position: fixed;
-        top: 68px;
-        left: 0;
-        right: 0;
-        background: var(--card);
-        transform: translateY(-100%);
-        transition: transform .35s ease;
-        z-index: 9998;
-        box-shadow: 0 6px 20px rgba(0,0,0,.1);
-      }
-      nav.open { transform: translateY(0); }
-      nav ul {
-        list-style: none;
-        margin: 0;
-        padding: 12px 0;
-        display: flex;
-        flex-direction: column;
-        gap: 8px;
-      }
-      nav li a {
-        display: block;
-        text-align: center;
-        padding: 10px 0;
-        text-decoration: none;
-        color: var(--dark);
-        font-weight: 600;
-      }
-      nav li a:hover { background: rgba(0,0,0,0.05); }
+      /* Header + nav */
+      header{position:fixed;top:0;left:0;right:0;height:68px;display:flex;align-items:center;justify-content:space-between;padding:0 14px;background:rgba(255,255,255,.96);backdrop-filter:blur(10px);border-bottom:1px solid rgba(0,0,0,.07);z-index:9999}
+      body.dark header{background:rgba(12,18,30,.9);border-bottom:1px solid rgba(255,255,255,.06)}
+      .brand{font-weight:800;font-size:18px;white-space:nowrap;color:var(--dark)}
+      .header-actions{display:flex;align-items:center;gap:8px}
+      .btn{background:transparent;border:0;padding:8px 10px;border-radius:10px;cursor:pointer;font-size:15px;color:var(--dark)}
+      .btn:hover{background:var(--glass)}
+      body.dark .btn{color:#fff}
 
-      /* ===== Obsah ===== */
-      main { padding-top: 90px; padding-inline: 14px; }
-      .hero { display: flex; flex-direction: column; gap: 12px; margin-bottom: 28px; }
-      .buttons { display: flex; gap: 10px; flex-wrap: wrap; }
-      .card { margin-top: 10px; }
+      nav{position:fixed;top:68px;left:0;right:0;background:var(--card);transform:translateY(-100%);transition:transform .3s ease;z-index:9998;box-shadow:0 10px 28px rgba(2,6,23,.12)}
+      nav.open{transform:translateY(0)}
+      nav ul{list-style:none;margin:0;padding:10px}
+      nav li a{display:block;text-align:center;padding:12px;border-radius:10px;text-decoration:none;color:var(--dark);font-weight:600}
+      nav li a:hover{background:var(--glass)}
+      body.dark nav{background:#0f1724}
 
-      /* Obrázky a slideshow */
-      .wide-carousel img { width: 100%; border-radius: 10px; }
+      /* Main layout */
+      main{max-width:1100px;margin:0 auto;padding:88px 14px 24px}
+      section{margin-bottom:28px}
+      h1{font-size:20px;margin:0 0 10px}
+      h2{font-size:18px;margin:0 0 6px}
+      .muted{color:var(--muted);font-size:14px}
+      .buttons{display:flex;gap:10px;flex-wrap:wrap;margin:8px 0 6px}
+      a.cta{display:inline-block;font-weight:700;font-size:14px;padding:10px 16px;border-radius:12px;text-decoration:none;cursor:pointer}
+      .primary-btn{color:#fff;background:linear-gradient(135deg,#b584ec,#3d7ed3);box-shadow:0 6px 18px rgba(0,123,255,.25)}
+      .secondary-btn{color:#fff;background:linear-gradient(135deg,#7f7cf2,#33c1ff)}
+      .card{background:var(--card);border-radius:12px;box-shadow:var(--shadow);padding:14px}
 
-      /* Formulář */
-      form input, form textarea {
-        width: 100%;
-        padding: 10px;
-        border-radius: 8px;
-        border: 1px solid rgba(15,23,36,0.1);
-        font-family: inherit;
-      }
+      /* Services grid */
+      .services{display:grid;grid-template-columns:1fr;gap:10px}
+      .service.card h4{margin:0 0 6px}
 
-      /* Patička */
-      footer {
-        text-align: center;
-        padding: 28px 10px;
-        font-size: 13px;
-        color: var(--muted);
-      }
+      /* Pricing */
+      .pricing{display:grid;grid-template-columns:1fr;gap:12px}
+      .price-table{display:flex;flex-direction:column;gap:10px}
+      .price-row{display:flex;align-items:center;justify-content:space-between;padding:10px;border-radius:10px;border:1px solid rgba(15,23,36,0.06)}
+      .price-row strong .price{font-variant-numeric:tabular-nums}
 
-      body.dark header {
-        background: rgba(20,20,25,0.9);
-        color: #fff;
-      }
-      body.dark nav { background: rgba(25,25,30,0.96); }
-      body.dark nav li a { color: #f0f0f0; }
-      body.dark .moon-btn, body.dark .lang-btn, body.dark .menu-toggle { color: #fff; }
+      /* Fleet carousel (simple) */
+      .wide-carousel{position:relative;overflow:hidden;border-radius:12px}
+      .wc-track{display:flex;width:100%;transition:transform .6s cubic-bezier(.22,.9,.26,1)}
+      .wc-item{min-width:100%}
+      .wc-item img{width:100%;height:220px;object-fit:cover;display:block;border-radius:12px}
+
+      /* Contact form */
+      .contact-grid{display:grid;grid-template-columns:1fr;gap:12px}
+      form input,form textarea{width:100%;padding:10px;border-radius:8px;border:1px solid rgba(15,23,36,0.12);font-family:inherit}
+      form textarea{min-height:110px}
+      #kontakt button.cta{width:100%;margin-top:6px}
+
+      /* Footer */
+      footer{max-width:1100px;margin:10px auto 24px;padding:0 14px;color:var(--muted);font-size:13px;text-align:center}
     </style>
   </head>
 
@@ -114,108 +71,247 @@
     <header>
       <div class="brand">Autodoprava Deniska</div>
       <div class="header-actions">
-        <button class="lang-btn" id="langToggle">EN</button>
-        <button class="moon-btn" id="darkToggle">🌙</button>
-        <button class="menu-toggle" id="menuBtn">☰</button>
+        <button class="btn" id="langToggle">EN</button>
+        <button class="btn" id="darkToggle">🌙</button>
+        <button class="btn" id="menuToggle">☰</button>
       </div>
     </header>
 
     <nav id="mobileMenu">
       <ul>
-        <li><a href="#sluzby">Služby</a></li>
-        <li><a href="#cenik">Ceník</a></li>
-        <li><a href="#vozovy-park">Vozový park</a></li>
-        <li><a href="#kontakt">Kontakt</a></li>
-        <li><a class="cta" href="#kontakt">Rezervace</a></li>
+        <li><a href="#sluzby" data-i18n="nav_services">Služby</a></li>
+        <li><a href="#cenik" data-i18n="nav_pricing">Ceník</a></li>
+        <li><a href="#vozovy-park" data-i18n="nav_fleet">Vozový park</a></li>
+        <li><a href="#kontakt" data-i18n="nav_contact">Kontakt</a></li>
+        <li><a class="cta" href="#kontakt" data-i18n="nav_booking">Rezervace</a></li>
       </ul>
     </nav>
 
     <main>
-      <!-- Odstraněna horní slideshow kvůli výkonu -->
+      <!-- HERO (bez horní slideshow na mobile) -->
       <section class="hero">
-        <h1>Autodoprava Deniska — profesionální přeprava osob a transfery</h1>
-        <p>Diskrétní a spolehlivé služby přepravy: transfery na letiště, osobní přepravy mezi městy, pronájem vozidla s řidičem pro svatby a oslavy nebo přeprava menšího nákladu. Moderní vozový park a zkušený řidič — komfort, bezpečí a přesnost.</p>
+        <h1 data-i18n="hero_title">Autodoprava Deniska — profesionální přeprava osob a transfery</h1>
+        <p class="muted" data-i18n="hero_text">
+          Diskrétní a spolehlivé služby přepravy: transfery na letiště, osobní přepravy mezi městy,
+          pronájem vozidla s řidičem pro svatby a oslavy nebo přeprava menšího nákladu. Moderní vozový park
+          a zkušený řidič — komfort, bezpečí a přesnost.
+        </p>
         <div class="buttons">
-          <a class="cta primary-btn" href="#kontakt">Objednat transfer</a>
-          <a class="cta secondary-btn" href="#cenik">Zobrazit ceník</a>
+          <a class="cta primary-btn" href="#kontakt" data-i18n="btn_order">Objednat transfer</a>
+          <a class="cta secondary-btn" href="#cenik" data-i18n="btn_pricing">Zobrazit ceník</a>
         </div>
         <div class="card">
-          <strong>Rychlá hotline</strong>
-          <p class="muted">Tel: +420 777 135 004 / +420 776 135 001</p>
-          <p class="muted">IČO: 09235787 • DIČ: CZ7409214065</p>
+          <div style="font-weight:700" data-i18n="hotline_title">Rychlá hotline</div>
+          <div class="muted">Tel: +420 777 135 004 / +420 776 135 001 • email: renedolezel@seznam.cz</div>
+          <div class="muted">IČO: 09235787 • DIČ: CZ7409214065</div>
         </div>
       </section>
 
+      <!-- SLUŽBY -->
       <section id="sluzby">
-        <h2>Naše služby</h2>
-        <p class="muted">Komplexní nabídka přepravy přizpůsobená vašim požadavkům — od jednoduchých transferů po dlouhodobé pronájmy s řidičem.</p>
+        <h2 data-i18n="services_title">Naše služby</h2>
+        <p class="muted" data-i18n="services_text">Komplexní nabídka přepravy přizpůsobená vašim požadavkům — od jednoduchých transferů po dlouhodobé pronájmy s řidičem.</p>
         <div class="services">
-          <div class="service card"><h4>Transfery mezi městy</h4><p class="muted">Přímé spoje bez přestupů: pohodlí, bezpečí a přesný odhad času příjezdu.</p></div>
-          <div class="service card"><h4>Transfery na letiště</h4><p class="muted">Načasování dle vašeho letu, pomoc s zavazadly a profesionální chování řidiče.</p></div>
-          <div class="service card"><h4>Svatební a společenské události</h4><p class="muted">Elegantní vozy s řidičem pro svatby, oslavy a VIP dopravu.</p></div>
-          <div class="service card"><h4>Malý náklad</h4><p class="muted">Možnost převozu menšího nákladu v rámci služeb – bezpečně a diskrétně.</p></div>
+          <div class="service card">
+            <h4 data-i18n="svc_intercity_title">Transfery mezi městy</h4>
+            <p class="muted" data-i18n="svc_intercity_text">Přímé spoje bez přestupů: pohodlí, bezpečí a přesný odhad času příjezdu.</p>
+          </div>
+          <div class="service card">
+            <h4 data-i18n="svc_airport_title">Transfery na letiště</h4>
+            <p class="muted" data-i18n="svc_airport_text">Načasování dle vašeho letu, pomoc s zavazadly a profesionální chování řidiče.</p>
+          </div>
+          <div class="service card">
+            <h4 data-i18n="svc_events_title">Svatební a společenské události</h4>
+            <p class="muted" data-i18n="svc_events_text">Elegantní vozy s řidičem pro svatby, oslavy a VIP dopravu.</p>
+          </div>
+          <div class="service card">
+            <h4 data-i18n="svc_cargo_title">Malý náklad</h4>
+            <p class="muted" data-i18n="svc_cargo_text">Možnost převozu menšího nákladu v rámci služeb – bezpečně a diskrétně.</p>
+          </div>
         </div>
       </section>
 
+      <!-- CENÍK -->
       <section id="cenik">
-        <h2>Ceník (orientační)</h2>
-        <p class="muted">Níže uvedené ceny jsou reprezentativním příkladem...</p>
+        <h2 data-i18n="pricing_title">Ceník (orientační)</h2>
+        <p class="muted" data-i18n="pricing_note">Níže uvedené ceny jsou reprezentativním příkladem. Ceny jsou smluvní a mohou se lišit podle konkrétní objednávky. Všechny ceny jsou uvedeny bez DPH.</p>
+
         <div class="pricing">
           <div class="card price-table">
-            <strong>Osobní vůz: Škoda Kodiaq (max 4 osoby)</strong>
-            <div class="price-row"><div>Brno – Bratislava</div><div><strong>3 600 Kč</strong></div></div>
-            <div class="price-row"><div>Brno – Vídeň</div><div><strong>3 600 Kč</strong></div></div>
-            <div class="price-row"><div>Brno – Praha</div><div><strong>4 500 Kč</strong></div></div>
+            <strong data-i18n="pricing_car_title">Osobní vůz: Škoda Kodiaq (max 4 osoby)</strong>
+            <div class="price-row"><div>Brno – Bratislava</div><div><strong><span class="price">3 600</span> <span class="currency">Kč</span></strong></div></div>
+            <div class="price-row"><div>Brno – Vídeň</div><div><strong><span class="price">3 600</span> <span class="currency">Kč</span></strong></div></div>
+            <div class="price-row"><div>Brno – Praha</div><div><strong><span class="price">4 500</span> <span class="currency">Kč</span></strong></div></div>
           </div>
+
           <div class="card price-table">
-            <strong>Minivan: Mercedes třídy V (max 6 osob)</strong>
-            <div class="price-row"><div>Brno – Bratislava</div><div><strong>4 500 Kč</strong></div></div>
-            <div class="price-row"><div>Brno – Vídeň</div><div><strong>4 500 Kč</strong></div></div>
-            <div class="price-row"><div>Brno – Praha</div><div><strong>5 850 Kč</strong></div></div>
+            <strong data-i18n="pricing_van_title">Minivan: Mercedes třídy V (max 6 osob)</strong>
+            <div class="price-row"><div>Brno – Bratislava</div><div><strong><span class="price">4 500</span> <span class="currency">Kč</span></strong></div></div>
+            <div class="price-row"><div>Brno – Vídeň</div><div><strong><span class="price">4 500</span> <span class="currency">Kč</span></strong></div></div>
+            <div class="price-row"><div>Brno – Praha</div><div><strong><span class="price">5 850</span> <span class="currency">Kč</span></strong></div></div>
+          </div>
+
+          <div class="card price-table">
+            <strong data-i18n="pricing_rental_title">Pronájem vozidla s řidičem (svatby, oslavy)</strong>
+            <div class="price-row"><div data-i18n="pricing_base">Základní sazba</div><div><strong><span class="price">3 000</span> <span class="currency">Kč</span> / <span data-i18n="pricing_2h">2 hod</span></strong></div></div>
+            <div class="price-row"><div data-i18n="pricing_included">V ceně zahrnuto</div><div class="muted" data-i18n="pricing_included_text">paušál 50 km za každou započatou hodinu</div></div>
+            <div class="price-row"><div data-i18n="pricing_wait">Čekání</div><div><strong><span class="price">400</span> <span class="currency">Kč</span> / <span data-i18n="per_hour">hod</span></strong></div></div>
+            <div class="price-row"><div data-i18n="pricing_extra">Každá další započatá hodina</div><div><strong><span class="price">1 500</span> <span class="currency">Kč</span></strong></div></div>
+            <div class="muted" data-i18n="pricing_fees">Ceny zahrnují poplatky za parkování a případné vjezdy na letiště.</div>
           </div>
         </div>
       </section>
 
+      <!-- VOZOVÝ PARK (jednoduchá mobilní slideshow) -->
       <section id="vozovy-park">
-        <h2>Vozový park</h2>
-        <p class="muted">Pečlivě udržované vozy od standardních osobních až po minivany pro skupiny.</p>
-        <div class="wide-carousel">
+        <h2 data-i18n="fleet_title">Vozový park</h2>
+        <p class="muted" data-i18n="fleet_text">Pečlivě udržované vozy od standardních osobních až po minivany pro skupiny. Všechny vozy jsou pojištěné a pravidelně kontrolované.</p>
+        <div class="wide-carousel" aria-label="Vozový park - carousel">
           <div class="wc-track" id="wc-track">
             <div class="wc-item"><img loading="lazy" src="assets/IMG_3125.webp" alt="Vůz 1"></div>
             <div class="wc-item"><img loading="lazy" src="assets/IMG_3126.webp" alt="Vůz 2"></div>
             <div class="wc-item"><img loading="lazy" src="assets/IMG_3127.webp" alt="Vůz 3"></div>
+            <div class="wc-item"><img loading="lazy" src="assets/IMG_3128.webp" alt="Vůz 4"></div>
+            <div class="wc-item"><img loading="lazy" src="assets/IMG_3129.webp" alt="Vůz 5"></div>
           </div>
         </div>
       </section>
 
+      <!-- KONTAKT -->
       <section id="kontakt">
-        <h2>Kontakt & rezervace</h2>
-        <div class="card">
-          <form action="send.php" method="POST">
-            <div style="display:flex;flex-direction:column;gap:8px">
-              <input placeholder="Jméno a příjmení" required>
-              <input placeholder="Telefon" required>
-              <input placeholder="Email">
-              <textarea placeholder="Zpráva / požadavek"></textarea>
-              <button class="cta" type="submit">Odeslat</button>
-            </div>
-          </form>
+        <h2 data-i18n="contact_title">Kontakt & rezervace</h2>
+        <div class="contact-grid">
+          <div class="card">
+            <p class="muted" data-i18n="contact_text">Pro rezervace a cenovou nabídku nám zavolejte nebo napište. Preferujeme přímou domluvu pro upřesnění trasy, počtu osob a časů.</p>
+            <p><strong>Tel:</strong> +420 777 135 004 / +420 776 135 001<br><strong>Email:</strong> renedolezel@seznam.cz</p>
+          </div>
+          <div class="card">
+            <form action="send.php" method="POST">
+              <div style="display:flex;flex-direction:column;gap:8px">
+                <input data-i18n-ph="ph_name" placeholder="Jméno a příjmení" required>
+                <input data-i18n-ph="ph_phone" placeholder="Telefon" required>
+                <input data-i18n-ph="ph_email" placeholder="Email">
+                <textarea data-i18n-ph="ph_msg" placeholder="Zpráva / požadavek"></textarea>
+                <button class="cta primary-btn" type="submit" data-i18n="btn_send">Odeslat</button>
+              </div>
+            </form>
+          </div>
         </div>
       </section>
     </main>
 
     <footer>
       <div>© Autodoprava Deniska — Všechna práva vyhrazena</div>
-      <div class="muted">IČO: 09235787 • DIČ: CZ7409214065 • Ceny jsou smluvní.</div>
+      <div class="muted">IČO: 09235787 • DIČ: CZ7409214065 • Ceny jsou smluvní, tento ceník je orientační.</div>
     </footer>
 
-    <script src="script.js"></script>
     <script>
-      // Rozbalovací menu
-      const menuBtn=document.getElementById("menuBtn");
-      const mobileMenu=document.getElementById("mobileMenu");
-      menuBtn.addEventListener("click",()=>mobileMenu.classList.toggle("open"));
-      document.querySelectorAll("#mobileMenu a").forEach(a=>a.addEventListener("click",()=>mobileMenu.classList.remove("open")));
+      // --- MENU ---
+      const menuBtn=document.getElementById('menuToggle');
+      const mobileMenu=document.getElementById('mobileMenu');
+      menuBtn.addEventListener('click',()=>mobileMenu.classList.toggle('open'));
+      document.querySelectorAll('#mobileMenu a').forEach(a=>a.addEventListener('click',()=>mobileMenu.classList.remove('open')));
+
+      // --- DARK MODE ---
+      const darkBtn=document.getElementById('darkToggle');
+      (function initDark(){
+        try{if(localStorage.getItem('deniska-dark')==='1')document.body.classList.add('dark');}catch(e){}
+        darkBtn.textContent=document.body.classList.contains('dark')?'☀️':'🌙';
+      })();
+      darkBtn.addEventListener('click',()=>{
+        document.body.classList.toggle('dark');
+        darkBtn.textContent=document.body.classList.contains('dark')?'☀️':'🌙';
+        try{localStorage.setItem('deniska-dark',document.body.classList.contains('dark')?'1':'0');}catch(e){}
+      });
+
+      // --- SIMPLE FLEET SLIDESHOW (wc-track) ---
+      (function(){
+        const track=document.getElementById('wc-track');
+        if(!track) return;
+        const items=Array.from(track.children);
+        let i=0; function show(idx){i=(idx+items.length)%items.length;track.style.transform=`translateX(-${i*100}%)`;}
+        setInterval(()=>show(i+1),4000);
+      })();
+
+      // --- I18N (CZ/EN) ---
+      const i18n={
+        en:{
+          nav_services:"Services",nav_pricing:"Price list",nav_fleet:"Fleet",nav_contact:"Contact",nav_booking:"Booking",
+          hero_title:"Deniska Transport — professional passenger transport and transfers",
+          hero_text:"Discreet and reliable transport services: airport transfers, intercity travel, car rental with driver for weddings and events, or small cargo transport. Modern fleet and experienced driver — comfort, safety and precision.",
+          btn_order:"Book transfer",btn_pricing:"View price list",hotline_title:"Quick hotline",
+          services_title:"Our Services",
+          services_text:"Comprehensive transport services tailored to your needs — from simple transfers to long-term rentals with driver.",
+          svc_intercity_title:"Intercity Transfers",svc_intercity_text:"Direct routes without transfers: comfort, safety, and accurate arrival time.",
+          svc_airport_title:"Airport Transfers",svc_airport_text:"Timed to your flight, assistance with luggage, and professional driver conduct.",
+          svc_events_title:"Weddings & Events",svc_events_text:"Elegant vehicles with driver for weddings, celebrations and VIP transport.",
+          svc_cargo_title:"Small Cargo",svc_cargo_text:"Small cargo transport — safe and discreet.",
+          pricing_title:"Price List (indicative)",
+          pricing_note:"Prices below are representative examples. Prices are contractual and may vary. All prices exclude VAT.",
+          pricing_car_title:"Passenger car: Škoda Kodiaq (max 4 persons)",
+          pricing_van_title:"Minivan: Mercedes V-Class (max 6 persons)",
+          pricing_rental_title:"Vehicle rental with driver (weddings, events)",
+          pricing_base:"Base rate",pricing_included:"Included",pricing_included_text:"flat 50 km for each started hour",pricing_wait:"Waiting time",pricing_2h:"2 h",per_hour:"h",pricing_extra:"Each additional started hour",
+          fleet_title:"Fleet",fleet_text:"Well-maintained vehicles from standard cars to minivans. Fully insured and regularly serviced.",
+          contact_title:"Contact & Reservations",contact_text:"For booking or a price quote, call or email us. We prefer direct communication to specify route, passenger count and timing.",
+          ph_name:"Full name",ph_phone:"Phone",ph_email:"Email",ph_msg:"Message / request",btn_send:"Send",
+          currency:"CZK"
+        },
+        cs:{
+          nav_services:"Služby",nav_pricing:"Ceník",nav_fleet:"Vozový park",nav_contact:"Kontakt",nav_booking:"Rezervace",
+          hero_title:"Autodoprava Deniska — profesionální přeprava osob a transfery",
+          hero_text:"Diskrétní a spolehlivé služby přepravy: transfery na letiště, osobní přepravy mezi městy, pronájem vozidla s řidičem pro svatby a oslavy nebo přeprava menšího nákladu. Moderní vozový park a zkušený řidič — komfort, bezpečí a přesnost.",
+          btn_order:"Objednat transfer",btn_pricing:"Zobrazit ceník",hotline_title:"Rychlá hotline",
+          services_title:"Naše služby",
+          services_text:"Komplexní nabídka přepravy přizpůsobená vašim požadavkům — od jednoduchých transferů po dlouhodobé pronájmy s řidičem.",
+          svc_intercity_title:"Transfery mezi městy",svc_intercity_text:"Přímé spoje bez přestupů: pohodlí, bezpečí a přesný odhad času příjezdu.",
+          svc_airport_title:"Transfery na letiště",svc_airport_text:"Načasování dle vašeho letu, pomoc s zavazadly a profesionální chování řidiče.",
+          svc_events_title:"Svatební a společenské události",svc_events_text:"Elegantní vozy s řidičem pro svatby, oslavy a VIP dopravu.",
+          svc_cargo_title:"Malý náklad",svc_cargo_text:"Možnost převozu menšího nákladu v rámci služeb – bezpečně a diskrétně.",
+          pricing_title:"Ceník (orientační)",
+          pricing_note:"Níže uvedené ceny jsou reprezentativním příkladem. Ceny jsou smluvní a mohou se lišit podle konkrétní objednávky. Všechny ceny jsou uvedeny bez DPH.",
+          pricing_car_title:"Osobní vůz: Škoda Kodiaq (max 4 osoby)",
+          pricing_van_title:"Minivan: Mercedes třídy V (max 6 osob)",
+          pricing_rental_title:"Pronájem vozidla s řidičem (svatby, oslavy)",
+          pricing_base:"Základní sazba",pricing_included:"V ceně zahrnuto",pricing_included_text:"paušál 50 km za každou započatou hodinu",pricing_wait:"Čekání",pricing_2h:"2 hod",per_hour:"hod",pricing_extra:"Každá další započatá hodina",
+          fleet_title:"Vozový park",fleet_text:"Pečlivě udržované vozy od standardních osobních až po minivany pro skupiny. Všechny vozy jsou pojištěné a pravidelně kontrolované.",
+          contact_title:"Kontakt & rezervace",contact_text:"Pro rezervace a cenovou nabídku nám zavolejte nebo napište. Preferujeme přímou domluvu pro upřesnění trasy, počtu osob a časů.",
+          ph_name:"Jméno a příjmení",ph_phone:"Telefon",ph_email:"Email",ph_msg:"Zpráva / požadavek",btn_send:"Odeslat",
+          currency:"Kč"
+        }
+      };
+
+      const langBtn=document.getElementById('langToggle');
+      function applyLang(lang){
+        const dict=i18n[lang]||i18n.cs;
+        document.documentElement.lang=lang;
+
+        // texty
+        document.querySelectorAll('[data-i18n]').forEach(el=>{
+          const key=el.getAttribute('data-i18n');
+          if(dict[key]) el.textContent=dict[key];
+        });
+        // placeholdery
+        document.querySelectorAll('[data-i18n-ph]').forEach(el=>{
+          const key=el.getAttribute('data-i18n-ph');
+          if(dict[key]) el.setAttribute('placeholder',dict[key]);
+        });
+        // měna
+        document.querySelectorAll('.currency').forEach(el=>{el.textContent=dict.currency;});
+
+        // tlačítko (zobrazuji vždy "tu druhou" možnost)
+        langBtn.textContent=(lang==='cs')?'EN':'CZ';
+        try{localStorage.setItem('deniska-lang',lang);}catch(e){}
+      }
+      (function initLang(){
+        let lang='cs';
+        try{lang=localStorage.getItem('deniska-lang')||'cs';}catch(e){}
+        applyLang(lang);
+      })();
+      langBtn.addEventListener('click',()=>{
+        const cur=document.documentElement.lang==='cs'?'en':'cs';
+        applyLang(cur);
+      });
     </script>
   </body>
 </html>
