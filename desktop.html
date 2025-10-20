@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="cs">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Autodoprava Deniska — Profesionální přeprava osob a transfery</title>
+    <meta name="description" content="Autodoprava Deniska — transfery na letiště, svatby, oslavy, pronájem vozidel s řidičem. Profesionální a diskrétní doprava.">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+  </head>
+
+  <body>
+    <header>
+      <div class="nav">
+        <div class="brand"><span class="dot"></span>Autodoprava Deniska</div>
+        <nav>
+          <ul id="nav-menu">
+            <li><a href="#sluzby">Služby</a></li>
+            <li><a href="#cenik">Ceník</a></li>
+            <li><a href="#vozovy-park">Vozový park</a></li>
+            <li><a href="#kontakt">Kontakt</a></li>
+            <li><a class="cta" href="#kontakt">Rezervace</a></li>
+          </ul>
+        </nav>
+        <div class="header-actions" aria-hidden="false" style="margin-left:12px">
+            <button class="moon-btn" id="darkToggle" aria-pressed="false" title="Přepnout tmavý režim">🌙</button>
+            <button class="lang-btn" id="langToggle" title="Přepnout jazyk">🌐</button>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div class="left">
+          <h1 data-translate="hero_title">Autodoprava Deniska — profesionální přeprava osob a transfery</h1>
+          <p data-translate="hero_text">Diskrétní a spolehlivé služby přepravy: transfery na letiště, osobní přepravy mezi městy, pronájem vozidla s řidičem pro svatby a oslavy nebo přeprava menšího nákladu. Moderní vozový park a zkušený řidič — komfort, bezpečí a přesnost.</p>
+          <div class="buttons">
+            <a class="cta primary-btn" href="#kontakt" data-translate="hero_btn1">Objednat transfer</a>
+            <a class="cta secondary-btn" href="#cenik" data-translate="hero_btn2">Zobrazit ceník</a>
+          </div>
+
+          <div class="card hotline-card">
+            <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;">
+              <div>
+                <div style="font-weight:700" data-translate="hotline_title">Rychlá hotline</div>
+                <div class="muted" data-translate="hotline_contact">Tel: +420 777 135 004 / +420 776 135 001 • email: renedolezel@seznam.cz</div>
+              </div>
+              <div class="muted" data-translate="ico_dic">IČO: 09235787 • DIČ: CZ7409214065</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="right" style="flex:1">
+          <div class="slider-wrap">
+            <div class="slider card" aria-label="Slideshow vozového parku">
+              <div class="slides" id="slides">
+                <div class="slide"><img src="assets/IMG_3125.webp" alt="Vůz 1"></div>
+                <div class="slide"><img src="assets/IMG_3126.webp" alt="Vůz 2"></div>
+                <div class="slide"><img src="assets/IMG_3127.webp" alt="Vůz 3"></div>
+                <div class="slide"><img src="assets/IMG_3128.webp" alt="Vůz 4"></div>
+                <div class="slide"><img src="assets/IMG_3129.webp" alt="Vůz 5"></div>
+              </div>
+              <div class="controls">
+                <button id="prev">❮</button>
+                <button id="next">❯</button>
+              </div>
+            </div>
+            <div class="dots" id="dots"></div>
+          </div>
+        </div>
+      </section>
+
+      <section id="sluzby">
+        <h2 data-translate="services_title">Naše služby</h2>
+        <p class="muted" data-translate="services_text">Komplexní nabídka přepravy přizpůsobená vašim požadavkům — od jednoduchých transferů po dlouhodobé pronájmy s řidičem.</p>
+        <div class="services">
+          <div class="service card">
+            <h4 data-translate="service1_title">Transfery mezi městy</h4>
+            <p class="muted" data-translate="service1_text">Přímé spoje bez přestupů: pohodlí, bezpečí a přesný odhad času příjezdu.</p>
+          </div>
+          <div class="service card">
+            <h4 data-translate="service2_title">Transfery na letiště</h4>
+            <p class="muted" data-translate="service2_text">Načasování dle vašeho letu, pomoc s zavazadly a profesionální chování řidiče.</p>
+          </div>
+          <div class="service card">
+            <h4 data-translate="service3_title">Svatební a společenské události</h4>
+            <p class="muted" data-translate="service3_text">Elegantní vozy s řidičem pro svatby, oslavy a VIP dopravu.</p>
+          </div>
+          <div class="service card">
+            <h4 data-translate="service4_title">Malý náklad</h4>
+            <p class="muted" data-translate="service4_text">Možnost převozu menšího nákladu v rámci služeb – bezpečně a diskrétně.</p>
+          </div>
+        </div>
+      </section>
+
+      <section id="cenik">
+        <h2 data-translate="pricing_title">Ceník (orientační)</h2>
+        <p class="muted" data-translate="pricing_note">Níže uvedené ceny jsou reprezentativním příkladem. Ceny jsou smluvní a mohou se lišit podle konkrétní objednávky. Všechny ceny jsou uvedeny bez DPH.</p>
+
+        <div class="pricing">
+          <div class="card price-table">
+            <strong data-translate="pricing_car1">Osobní vůz: Škoda Kodiaq (max 4 osoby)</strong>
+            <div class="price-row"><div data-translate="pricing_route1">Brno – Bratislava</div><div><strong data-translate="pricing_price1">3 600 Kč</strong></div></div>
+            <div class="price-row"><div data-translate="pricing_route2">Brno – Vídeň</div><div><strong data-translate="pricing_price2">3 600 Kč</strong></div></div>
+            <div class="price-row"><div data-translate="pricing_route3">Brno – Praha</div><div><strong data-translate="pricing_price3">4 500 Kč</strong></div></div>
+          </div>
+
+          <div class="card price-table">
+            <strong data-translate="pricing_car2">Minivan: Mercedes třídy V (max 6 osob)</strong>
+            <div class="price-row"><div>Brno – Bratislava</div><div><strong data-translate="pricing_price4">4 500 Kč</strong></div></div>
+            <div class="price-row"><div>Brno – Vídeň</div><div><strong data-translate="pricing_price5">4 500 Kč</strong></div></div>
+            <div class="price-row"><div>Brno – Praha</div><div><strong data-translate="pricing_price6">5 850 Kč</strong></div></div>
+          </div>
+
+          <div class="card price-table">
+            <strong data-translate="pricing_car3">Pronájem vozidla s řidičem (svatby, oslavy)</strong>
+            <div class="price-row"><div data-translate="pricing_item1">Základní sazba</div><div><strong data-translate="pricing_price7">3 000 Kč / 2 hod</strong></div></div>
+            <div class="price-row"><div data-translate="pricing_item2">V ceně zahrnuto</div><div class="muted" data-translate="pricing_info1">paušál 50 km za každou započatou hodinu</div></div>
+            <div class="price-row"><div data-translate="pricing_item3">Čekání</div><div><strong data-translate="pricing_price8">400 Kč / hod</strong></div></div>
+            <div class="price-row"><div data-translate="pricing_item4">Každá další započatá hodina</div><div><strong data-translate="pricing_price9">1 500 Kč</strong></div></div>
+            <div class="muted" data-translate="pricing_footer">Ceny zahrnují poplatky za parkování a případné vjezdy na letiště.</div>
+          </div>
+        </div>
+      </section>
+
+      <section id="vozovy-park">
+        <h2 data-translate="fleet_title">Vozový park</h2>
+        <p class="muted" data-translate="fleet_text">Pečlivě udržované vozy od standardních osobních až po minivany pro skupiny. Všechny vozy jsou pojištěné a pravidelně kontrolované.</p>
+        <div class="wide-carousel" aria-label="Vozový park - carousel">
+          <div class="wc-track" id="wc-track">
+            <div class="wc-item"><img src="assets/IMG_3125.webp" alt="Vůz 1"></div>
+            <div class="wc-item"><img src="assets/IMG_3126.webp" alt="Vůz 2"></div>
+            <div class="wc-item"><img src="assets/IMG_3127.webp" alt="Vůz 3"></div>
+            <div class="wc-item"><img src="assets/IMG_3128.webp" alt="Vůz 4"></div>
+            <div class="wc-item"><img src="assets/IMG_3129.webp" alt="Vůz 5"></div>
+          </div>
+          <button class="wc-btn prev" id="wc-prev">◀</button>
+          <button class="wc-btn next" id="wc-next">▶</button>
+        </div>
+      </section>
+
+      <section id="kontakt">
+        <h2 data-translate="contact_title">Kontakt & rezervace</h2>
+        <div class="contact-grid">
+          <div class="card">
+            <p class="muted" data-translate="contact_info">Pro rezervace a cenovou nabídku nám zavolejte nebo napište. Preferujeme přímou domluvu pro upřesnění trasy, počtu osob a časů.</p>
+            <p><strong>Tel:</strong> +420 777 135 004 / +420 776 135 001<br><strong>Email:</strong> renedolezel@seznam.cz</p>
+          </div>
+          <div class="card">
+            <form action="send.php" method="POST">
+              <div style="display:flex;flex-direction:column;gap:8px">
+                <input placeholder="Jméno a příjmení" data-placeholder-en="Full name" required>
+                <input placeholder="Telefon" data-placeholder-en="Phone" required>
+                <input placeholder="Email" data-placeholder-en="Email">
+                <textarea placeholder="Zpráva / požadavek" data-placeholder-en="Message / request"></textarea>
+                <button class="cta" type="submit" data-translate="form_send">Odeslat</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div class="footer-wrap">
+        <div data-translate="footer_copy">© Autodoprava Deniska — Všechna práva vyhrazena</div>
+        <div class="muted" data-translate="footer_info">IČO: 09235787 • DIČ: CZ7409214065 • Ceny jsou smluvní, tento ceník je orientační.</div>
+      </div>
+    </footer>
+
+    <script src="script.js"></script>
+  </body>
+</html>

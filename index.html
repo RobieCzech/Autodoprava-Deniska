@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="cs">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Autodoprava Deniska — Přesměrování</title>
+    <meta name="description" content="Automatické rozpoznání zařízení – Autodoprava Deniska.">
+    <script>
+      (function() {
+        const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)
+                        || window.innerWidth < 900;
+        if (isMobile) {
+          window.location.href = "mobile.html";
+        } else {
+          window.location.href = "desktop.html";
+        }
+      })();
+    </script>
+    <style>
+      body {font-family: sans-serif;display:flex;align-items:center;justify-content:center;height:100vh;background:#f2f2f2;color:#333;}
+      .loading {text-align:center;}
+      .loading span {display:block;font-size:18px;margin-top:12px;color:#666;}
+    </style>
+  </head>
+  <body>
+    <div class="loading">
+      <div>🚗 Načítám správnou verzi webu...</div>
+      <span>Prosím čekejte</span>
+    </div>
+  </body>
+</html>
